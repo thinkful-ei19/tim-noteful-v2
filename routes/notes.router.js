@@ -55,13 +55,14 @@ router.get('/notes/:id', (req, res, next) => {
   */
   knex.select()
     .from('notes')
+    .first()
     .where(function () {
       if (noteId) {
         this.where('id', noteId);
       }
     })
     .then(item => {
-      res.json(item[0]);
+      res.json(item);
     })
     .catch(err => next(err));
 
